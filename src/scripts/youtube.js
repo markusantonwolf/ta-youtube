@@ -9,6 +9,7 @@ function youtube() {
             autoplay: false,
             aspect_ratio: '1.78',
             start_at: '',
+            end_at: '',
             button: 'button',
         },
         init: function (id, options) {
@@ -26,24 +27,40 @@ function youtube() {
             this.url = this.default.base_url + id
             this.hash = this.hashCode(window.location.href) + '_' + this.hashCode(this.url)
 
+            // defines the query array for playback options
+            const query = []
+
             // check if the video was actived
             if (localStorage.getItem('youtube_' + this.hash) === 'true' && this.default.remember) {
                 this.active = true
                 // if autoplay true play video by default
                 if (this.default.autoplay) {
-                    this.url += '?autoplay=1'
+                    query.push('autoplay=1')
                 }
             } else {
                 // play video after activation click
-                this.url += '?autoplay=1'
+                query.push('autoplay=1')
             }
             if (typeof this.$refs[this.default.button] !== 'undefined') {
                 this.setButtonHeight()
 
-                // event listener to re-define the height of the elements
+                // event listener to re-define the height of the botton
                 window.addEventListener('resize', () => {
                     this.setButtonHeight()
                 })
+            }
+
+            if (this.default.start_at !== '') {
+                query.push('start=' + this.default.start_at)
+            }
+
+            if (this.default.end_at !== '') {
+                query.push('end=' + this.default.end_at)
+            }
+
+            // adds options to the video url
+            if (query.length > 0) {
+                this.url += '?' + query.join('&')
             }
         },
         show() {
