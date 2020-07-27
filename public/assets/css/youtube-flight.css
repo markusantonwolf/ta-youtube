@@ -1,0 +1,1 @@
+.youtube__anim--flight{animation-name:youtube-keyframes-flight;transform-origin:top center}@keyframes youtube-keyframes-flight{0%{transform:scale(1.1) rotateX(0deg)}50%{transform:scale(1.2) rotateX(25deg)}to{transform:scale(1.1) rotateX(0deg)}}

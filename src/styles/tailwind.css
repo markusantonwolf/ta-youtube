@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&display=swap');
+@tailwind base;
+
+:root {
+  --vh: 1vh;
+  --navigation-height: 100px;
+  --navigation-zindex: 100;
+  --notifications-zindex: 99;
+}
+
+html,
+body {
+  font-size: 13px;
+}
+
+@screen sm {
+  html,
+  body {
+    font-size: 15px;
+  }
+}
+@screen md {
+  html,
+  body {
+    font-size: 16px;
+  }
+}
+@screen lg {
+  html,
+  body {
+    font-size: 18px;
+  }
+}
+
+input,
+textarea,
+button,
+select,
+div,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  background: radial-gradient(circle at 30% 30%, #fff, #e6e6e6);
+  @apply inline-flex bg-white rounded-full p-4 text-pink-800 shadow-md border border-gray-200 transition ease-in-out duration-500;
+}
+.btn:hover {
+  background: radial-gradient(circle at 30% 30%, #d250a2, #97266d);
+  @apply text-white border-pink-900 transform scale-110;
+}
