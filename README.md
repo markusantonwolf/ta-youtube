@@ -17,7 +17,7 @@ For more details about the TA-Pagination take a look at <https://ta-youtube.mark
 ## Features
 
 -   YouTube video wrapper
--   No pivacy issues because YouTube player loads after pressing playback button
+-   No privacy issues because YouTube player loads after pressing playback button
 -   Stores playback state
 -   Customizable animations - CSS animations
 -   Title, description and background images
