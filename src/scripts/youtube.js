@@ -7,7 +7,7 @@ function youtube() {
             base_url: 'https://www.youtube-nocookie.com/embed/',
             remember: true,
             autoplay: false,
-            aspect_ratio: '1.87',
+            aspect_ratio: '1.78',
             start_at: '',
             button: 'button',
         },
