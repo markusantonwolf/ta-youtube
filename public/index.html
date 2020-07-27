@@ -50,7 +50,7 @@
                         <div
                             class="youtube youtube--perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
                             x-data="youtube()"
-                            x-init="init('FeJKJ5MoCHY', {autoplay: true,start_at: 200,end_at:220})"
+                            x-init="init('FeJKJ5MoCHY', {remember:false,autoplay: true,start_at: 200,end_at:220})"
                         >
                             <a
                                 href="play"
@@ -61,10 +61,10 @@
                                 <img
                                     class="absolute inset-0 w-full h-full object-cover youtube__anim youtube__anim--flight z-0"
                                     src="https://picsum.photos/id/10/1400/700"
-                                    alt="asdasd"
-                                    title="adasd"
+                                    alt="Background Image"
+                                    title="Background Image"
                                 />
-                                <div class="absolute inset-0 w-full h-full youtube__gradient"></div>
+                                <div class="youtube__gradient youtube__gradient--dark"></div>
                                 <img
                                     src="/assets/img/youtube-button.svg"
                                     class="youtube__button transform duration-200 hover:scale-110"
