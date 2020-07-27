@@ -7,6 +7,7 @@ function youtube() {
             base_url: 'https://www.youtube-nocookie.com/embed/',
             remember: true,
             autoplay: false,
+            aspect_ratio: '1.87',
             start_at: '',
             button: 'button',
         },
@@ -17,6 +18,9 @@ function youtube() {
                     this.default[key] = value
                 }
             }
+
+            // set aspect ratio as CSS custom property
+            this.$el.style.setProperty(`--aspectRatio`, parseFloat(this.default.aspect_ratio))
 
             // define the url without query string for hash
             this.url = this.default.base_url + id
@@ -41,9 +45,9 @@ function youtube() {
                     this.setButtonHeight()
                 })
             }
-            // this.url += 't=206'
         },
         show() {
+            // activate youtube player
             this.active = true
 
             // if activation should be remembered
@@ -52,13 +56,10 @@ function youtube() {
             }
         },
         setButtonHeight() {
+            // defines the height of the playback button as CSS custom property
             const button_height = this.$refs[this.default.button].offsetHeight
-            this.$el.style.setProperty(`--buttonHeight`, `${button_height}px`)
+            this.$el.style.setProperty(`--buttonHeight`, button_height + 'px')
         },
-        // toggle() {
-        //     console.info('active', this.active)
-        //     this.active = !this.active
-        // },
         hashCode(string) {
             var hash = 0,
                 i,
