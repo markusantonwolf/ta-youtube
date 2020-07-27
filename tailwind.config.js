@@ -43,6 +43,7 @@ module.exports = {
         backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     },
     plugins: [
+        require('@tailwindcss/ui'),
         plugin(function ({ addUtilities }) {
             const newUtilities = {
                 '.text-shadow': {
