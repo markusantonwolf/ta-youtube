@@ -28,7 +28,7 @@ For more details about the TA-Pagination take a look at <https://ta-youtube.mark
 
 ## CDN
 
-### TA-Foodtrucks
+### TA-YouTube
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@latest/dist/js/youtube.js"></script>
