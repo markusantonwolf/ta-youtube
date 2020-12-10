@@ -1,1 +1,62 @@
-.youtube{position:relative;width:100%;height:0;padding-bottom:calc(100%/var(--aspectRatio, 1.78))}.youtube--perspective{perspective:1000px}.youtube__button{width:calc(100%/var(--aspectRatio, 1.78)*0.3);height:auto}.youtube__gradient{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%}.youtube__gradient--dark{background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 50%,rgba(0,0,0,.6)),linear-gradient(90deg,rgba(0,0,0,.2),transparent 50%,rgba(0,0,0,.2))}.youtube__title{top:0;bottom:calc(50% + var(--buttonHeight, 100)/2)}.youtube__description,.youtube__title{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center}.youtube__description{bottom:0;top:calc(50% + var(--buttonHeight, 100)/2)}.youtube__anim{animation-timing-function:ease-in-out;animation-delay:0s;animation-fill-mode:both;animation-duration:20s;transform-origin:center center;animation-iteration-count:infinite;backface-visibility:hidden}
+.youtube {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  padding-bottom: calc(100% / var(--aspectRatio, 1.78));
+}
+
+.youtube--perspective {
+  perspective: 1000px;
+}
+
+.youtube__button {
+  width: calc(100% / var(--aspectRatio, 1.78) * 0.3);
+  height: auto;
+}
+
+.youtube__gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.youtube__gradient--dark {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.youtube__title {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: calc(50% + var(--buttonHeight, 100) / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.youtube__description {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: calc(50% + var(--buttonHeight, 100) / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.youtube__anim {
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+  animation-duration: 20s;
+  transform-origin: center center;
+  animation-iteration-count: infinite;
+  backface-visibility: hidden;
+}

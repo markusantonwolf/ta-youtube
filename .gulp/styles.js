@@ -1,58 +1,60 @@
-const { dest, src, parallel } = require('gulp')
-const atimport = require('postcss-import')
+const config = require('config')
+const { src, dest, parallel } = require('gulp')
 const postcss = require('gulp-postcss')
 const purgecss = require('@fullhuman/postcss-purgecss')
-const tailwindcss = require('tailwindcss')
-const cssnano = require('cssnano')
-const config = require('config')
-const touch = require('gulp-touch-fd')
-const fs = require('fs')
-const { getFiles } = require('./_tools')
 
-const STYLES_BASE = config.get('gulp.styles.base')
-const STYLES_DISTRIBUTION = config.get('gulp.styles.distribution')
-const TAILWIND_CONFIG = config.get('gulp.tailwind.config')
-const PURGE_CONTENT = config.get('gulp.purge.content')
-const PURGE_WHITELIST = config.get('gulp.purge.whitelist')
+const SOURCE_LAYOUT = config.get('source.layout')
+const DESTINATION_LAYOUT = config.get('destination.layout')
+const SOURCE_PLUGIN_CSS = config.get('source.plugin_css')
+const SOURCE_PLUGIN_CSS_ANIM = config.get('source.plugin_css_anim')
+const DESTINATION_STYLES_CSS = config.get('destination.plugin_css')
+const DESTINATION_STYLES_CSS_ANIM = config.get('destination.plugin_css_anim')
+const PURGE_CONTENT = config.get('purge.content')
 
-const styles_bundle = getFiles(STYLES_BASE)
-styles_bundle.forEach((obj) => {
-  obj.dest = STYLES_DISTRIBUTION
-})
-
-const fnc_styles_develop = new Array()
-const fnc_styles_build = new Array()
-
-styles_bundle.forEach((obj) => {
-  fnc_styles_develop.push(function styles_develop() {
-    return src(obj.src)
-      .pipe(postcss([atimport(), tailwindcss(TAILWIND_CONFIG)]))
-      .pipe(dest(obj.dest))
-      .pipe(touch())
-  })
-  fnc_styles_build.push(function styles_build() {
-    let postcss_tasks = new Array()
-    postcss_tasks.push(atimport())
-    postcss_tasks.push(tailwindcss(TAILWIND_CONFIG))
-    postcss_tasks.push(
-      purgecss({
-        content: PURGE_CONTENT,
-        whitelist: PURGE_WHITELIST,
-        defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-      })
-    )
-    postcss_tasks.push(cssnano())
-    return src(obj.src).pipe(postcss(postcss_tasks)).pipe(dest(obj.dest)).pipe(touch())
-  })
-})
-
-if (fnc_styles_develop.length > 1) {
-  module.exports.styles_develop = parallel(fnc_styles_develop)
-} else {
-  module.exports.styles_develop = fnc_styles_develop
+const styles_styles = () => {
+    const postcssOptions = [require('tailwindcss'), require('autoprefixer')]
+    if (process.env.NODE_ENV === 'production') {
+        postcssOptions.push(
+            purgecss({
+                content: PURGE_CONTENT,
+                defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
+            })
+        )
+        postcssOptions.push(
+            require('cssnano')({
+                preset: 'default',
+            })
+        )
+    }
+    return src(SOURCE_LAYOUT).pipe(postcss(postcssOptions)).pipe(dest(DESTINATION_LAYOUT))
 }
-if (fnc_styles_build.length > 1) {
-  module.exports.styles_build = parallel(fnc_styles_build)
-} else {
-  module.exports.styles_build = fnc_styles_build
+const styles_ta_plugin = () => {
+    const postcssOptions = [require('tailwindcss'), require('autoprefixer')]
+    if (process.env.NODE_ENV === 'production') {
+        postcssOptions.push(
+            purgecss({
+                content: PURGE_CONTENT,
+                defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
+            })
+        )
+        postcssOptions.push(
+            require('cssnano')({
+                preset: 'default',
+            })
+        )
+    }
+    return src(SOURCE_PLUGIN_CSS).pipe(postcss(postcssOptions)).pipe(dest(DESTINATION_STYLES_CSS))
 }
+const styles_ta_plugin_anim = () => {
+    const postcssOptions = [require('autoprefixer')]
+    if (process.env.NODE_ENV === 'production') {
+        postcssOptions.push(
+            require('cssnano')({
+                preset: 'default',
+            })
+        )
+    }
+    return src(SOURCE_PLUGIN_CSS_ANIM).pipe(postcss(postcssOptions)).pipe(dest(DESTINATION_STYLES_CSS_ANIM))
+}
+
+module.exports.styles = parallel(styles_styles, styles_ta_plugin, styles_ta_plugin_anim)

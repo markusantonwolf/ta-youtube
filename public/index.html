@@ -4,10 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>TA-Youtube</title>
-        <link href="/assets/css/tailwind.css" rel="stylesheet" />
-        <link href="/assets/css/youtube.css" rel="stylesheet" />
-        <link href="/assets/css/youtube-flight.css" rel="stylesheet" />
-        <script src="/assets/js/alpine.min.js" defer></script>
+        <link href="/css/layout.css" rel="stylesheet" />
+        <script src="/js/alpine.min.js" defer></script>
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700&family=Fira+Code:wght@300&display=swap" rel="stylesheet" />
     </head>
     <body class="bg-white font-sans tracking-wide leading-loose text-base text-gray-900 font-light hyphens antialiased">
         <div class="flex flex-col min-h-screen">
@@ -15,7 +14,7 @@
                 <div class="container mx-auto text-center my-6">
                     <div class="md:w-2/3 leading-normal text-xl font-light mx-auto px-5 sm:px-2">
                         <h1 class="mx-auto w-1/2 my-8">
-                            <img src="/assets/img/logo-ta-youtube.png" alt="Logo TA-Youtube" class="w-full" />
+                            <img src="/img/logo-ta-youtube.png" alt="Logo TA-Youtube" class="w-full" />
                         </h1>
                         <p class="my-4">
                             A light-weight, responsive and mobile first YouTube video wrapper with auto playback and
@@ -48,9 +47,9 @@
                     </div>
                     <div class="my-24">
                         <div
-                            class="youtube youtube--perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
-                            x-data="youtube()"
-                            x-init="init('FeJKJ5MoCHY', {remember:false,autoplay: true,start_at: 200,end_at:220})"
+                            class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+                            x-data="taYoutube()"
+                            x-init="init('2ux2H_Iddvc', {remember:'false',autoplay: 'true',start_at: 10,end_at:220})"
                         >
                             <a
                                 href="play"
@@ -59,32 +58,92 @@
                                 x-show="!active"
                             >
                                 <img
-                                    class="absolute inset-0 w-full h-full object-cover youtube__anim youtube__anim--flight z-0"
+                                    class="absolute inset-0 w-full h-full object-cover ta-youtube-anim ta-youtube-anim-flight z-0"
                                     src="https://picsum.photos/id/10/1400/700"
                                     alt="Background Image"
                                     title="Background Image"
                                 />
-                                <div class="youtube__gradient youtube__gradient--dark"></div>
+                                <div class="ta-youtube-gradient ta-youtube-gradient-dark"></div>
                                 <img
-                                    src="/assets/img/youtube-button.svg"
-                                    class="youtube__button transform duration-200 hover:scale-110"
+                                    src="/img/youtube-button.svg"
+                                    class="ta-youtube-button transform duration-200 hover:scale-110"
                                     x-ref="button"
                                     alt="Show youtube video"
                                 />
-                                <div class="youtube__title">
+                                <div class="ta-youtube-title">
                                     <p
                                         class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-center text-white leading-tight font-normal text-shadow-blur mx-5 sm:mx-16"
                                     >
-                                        10 TOP Natural History Moments
+                                        Natural History Museum, Dublin
                                     </p>
                                 </div>
-                                <div class="youtube__description">
+                                <div class="ta-youtube-description">
                                     <p
                                         class="text-sm sm:text-large lg:text-xl font-medium text-center text-white leading-relaxed text-shadow-blur mx-5 sm:mx-16"
                                     >
-                                        This Earth Day, stay in and explore the beauty, drama and spectacle of our
-                                        natural world with 50 incredible natural history moments from BBC Earth based on
-                                        what you've been liking and sharing. This is the last of five videos.
+                                        Dublin's Natural History Museum, often referred to as the Dead Zoo, was built in
+                                        1856 for parts of the collection of the Royal Dublin Society. The Museum's
+                                        collection and the building have changed little since Victorian times, so it is
+                                        sometimes considered as a museum of a museum.
+                                    </p>
+                                </div>
+                            </a>
+                            <template x-if="active">
+                                <iframe
+                                    class="absolute inset-0 w-full h-full"
+                                    :src="url"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                ></iframe>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="my-24">
+                        <div
+                            class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+                            x-data="taYoutube()"
+                            x-init="init()"
+                            data-id="51018360"
+                            data-source="vimeo"
+                            data-remember="false"
+                            data-autoplay="true"
+                        >
+                            <a
+                                href="play"
+                                class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
+                                x-on:click.prevent="show()"
+                                x-show="!active"
+                            >
+                                <img
+                                    class="absolute inset-0 w-full h-full object-cover ta-youtube-anim ta-youtube-anim-flight z-0"
+                                    src="https://picsum.photos/id/10/1400/700"
+                                    alt="Background Image"
+                                    title="Background Image"
+                                />
+                                <div class="ta-youtube-gradient ta-youtube-gradient-dark"></div>
+                                <img
+                                    src="/img/youtube-button.svg"
+                                    class="ta-youtube-button transform duration-200 hover:scale-110"
+                                    x-ref="button"
+                                    alt="Show youtube video"
+                                />
+                                <div class="ta-youtube-title">
+                                    <p
+                                        class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-center text-white leading-tight font-normal text-shadow-blur mx-5 sm:mx-16"
+                                    >
+                                        The Natural History Museum Dublin
+                                    </p>
+                                </div>
+                                <div class="ta-youtube-description">
+                                    <p
+                                        class="text-sm sm:text-large lg:text-xl font-medium text-center text-white leading-relaxed text-shadow-blur mx-5 sm:mx-16"
+                                    >
+                                        The Natural History Museum Dublin is a ‘cabinet-style’ museum designed to
+                                        showcase a wide-ranging and comprehensive zoological collection, and has changed
+                                        little in over a century. Often described as a ‘museum of a museum’, its 10,000
+                                        exhibits provide a glimpse of the natural world that has delighted generations
+                                        of visitors since the doors opened in 1857.
                                     </p>
                                 </div>
                             </a>
@@ -104,7 +163,7 @@
                     <div class="max-w-2xl w-full lg:w-1/2 leading-normal text-xl font-light mx-auto py-12 px-2">
                         <div class="mx-auto w-1/2 my-8">
                             <img
-                                src="/assets/img/logo-ta-styled-plugins.png"
+                                src="/img/logo-ta-styled-plugins.png"
                                 alt="Logo TA StyledPLUGINS"
                                 class="w-full"
                             />
@@ -116,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-blue-900 text-white font-medium">
+            <div class="bg-gray-900 text-white font-medium">
                 <div class="container mx-auto py-6 text-center">
                     <p class="text-xs mx-2">
                         Licensed under the MIT license, see
@@ -128,6 +187,6 @@
                 </div>
             </div>
         </div>
-        <script src="/assets/js/youtube.js"></script>
+        <script src="/js/ta-youtube.js"></script>
     </body>
 </html>

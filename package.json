@@ -1,37 +1,47 @@
 {
-  "name": "ts-pagination",
-  "version": "1.0.0",
-  "description": "A light-weight Tailwind CSS and Alpine JS pagination for content",
-  "main": "/public/index.html",
-  "scripts": {
-    "develop": "npx gulp develop",
-    "build": "npx gulp build",
-    "serve": "npx gulp serve"
-  },
-  "author": "Markus A. Wolf",
-  "license": "MIT",
-  "dependencies": {
-    "@tailwindcss/ui": "^0.4.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@fullhuman/postcss-purgecss": "^2.3.0",
-    "alpinejs": "^2.7.0",
-    "babel-polyfill": "^6.26.0",
-    "config": "^3.3.2",
-    "cssnano": "^4.1.10",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-live-server": "0.0.31",
-    "gulp-minify": "^3.1.0",
-    "gulp-postcss": "^8.0.0",
-    "gulp-print": "^5.0.2",
-    "gulp-touch-fd": "^2.0.0",
-    "gulp-uglify-es": "^2.0.0",
-    "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.9.1"
-  }
+    "name": "@markusantonwolf/ta-youtube",
+    "version": "2.0.3",
+    "description": "A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player.",
+    "main": "src/plugin/index.js",
+    "scripts": {
+        "develop": "npx gulp build",
+        "build": "NODE_ENV=production npx gulp build",
+        "serve": "npx gulp serve",
+        "publish": "npm publish --access public",
+        "patch": "npm version patch",
+        "minor": "npm version minor",
+        "major": "npm version major"
+    },
+    "author": "Markus A. Wolf",
+    "contributors": [
+        "Markus A. Wolf <wolf.markus.anton@gmail.com>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/markusantonwolf/ta-youtube.git"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "lodash": "^4.17.20",
+        "change-case": "^4.1.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/preset-env": "^7.11.5",
+        "@fullhuman/postcss-purgecss": "^3.0.0",
+        "alpinejs": "^2.7.0",
+        "autoprefixer": "^9.8.6",
+        "config": "^3.3.2",
+        "cssnano": "^4.1.10",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-clean": "^0.4.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-file-include": "^2.2.2",
+        "gulp-live-server": "0.0.31",
+        "gulp-minify": "^3.1.0",
+        "gulp-postcss": "^9.0.0",
+        "gulp-print": "^5.0.2",
+        "tailwindcss": "^1.0.0"
+    }
 }
