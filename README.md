@@ -62,6 +62,13 @@ module.exports = {
 ></script>
 ```
 
+### TA-YouTube old version 1.x
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@1.02/dist/js/youtube.js"></script>
+```
+
+
 ## Options
 
 All options you can define
