@@ -57,7 +57,7 @@ module.exports = {
 
 ```html
 <script
-    src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-foodtrucks@latest/dist/scripts/alpine-ta-youtube.min.js"
+    src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-foodtrucks@latest/dist/js/alpine-ta-youtube.min.js"
     defer
 ></script>
 ```
