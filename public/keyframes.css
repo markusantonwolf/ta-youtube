@@ -21,9 +21,9 @@
 	}
 }
 
-.ta-youtube-anim-toleft {
-	animation-name: youtube-keyframes-toleft;
-	transform-origin: left center;
+.ta-youtube-anim-toright {
+	animation-name: youtube-keyframes-toright;
+	transform-origin: right center;
 }
 
 @keyframes youtube-keyframes-toright {
@@ -36,6 +36,11 @@
 	100% 	{
 		transform: scale(1.3) translateX(0rem);
 	}
+}
+
+.ta-youtube-anim-toleft {
+	animation-name: youtube-keyframes-toleft;
+	transform-origin: left center;
 }
 
 @keyframes youtube-keyframes-toleft {

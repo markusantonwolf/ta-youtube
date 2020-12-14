@@ -147,7 +147,7 @@ function getTaYoutubeAnim() {
         },
     }
     
-    new_keyframes['.ta-youtube-anim-toleft'] = {
+    new_keyframes['.ta-youtube-anim-toright'] = {
         animationName: 'youtube-keyframes-toright',
         transformOrigin: 'right center',
     }
