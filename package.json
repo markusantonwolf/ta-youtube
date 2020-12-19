@@ -20,6 +20,14 @@
         "type": "git",
         "url": "git+https://github.com/markusantonwolf/ta-youtube.git"
     },
+    "keywords": [
+        "tailwindcss",
+        "css",
+        "tailwind",
+        "filters",
+        "backdrop",
+        "blur"
+    ],
     "license": "MIT",
     "dependencies": {
         "lodash": "^4.17.20",
