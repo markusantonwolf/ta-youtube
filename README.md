@@ -116,17 +116,16 @@ You can define all options as an object inside the init() function - like this e
         x-show="!active"
     >
         <!-- CONTENT -->
-        <template x-if="active">
-            <iframe
-                class="absolute inset-0 w-full h-full"
-                :src="url"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-            ></iframe>
-        </template>
-        <!-- CONTENT -->
     </a>
+    <template x-if="active">
+        <iframe
+            class="absolute inset-0 w-full h-full"
+            :src="url"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+    </template>
 </div>
 ```
 
@@ -149,17 +148,16 @@ Alternativly you can define all options as data attributes - like this example.
         x-show="!active"
     >
         <!-- CONTENT -->
-        <template x-if="active">
-            <iframe
-                class="absolute inset-0 w-full h-full"
-                :src="url"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-            ></iframe>
-        </template>
-        <!-- CONTENT -->
     </a>
+    <template x-if="active">
+        <iframe
+            class="absolute inset-0 w-full h-full"
+            :src="url"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+    </template>
 </div>
 ```
 
