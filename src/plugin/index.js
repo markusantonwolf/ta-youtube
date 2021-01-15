@@ -96,7 +96,7 @@ function getTaYoutubeBase() {
         zIndex: '0',
     }
 
-    new_utilities['.ta-youtube-gradient-dark'] = {
+    new_utilities['.ta-youtube-gradient'] = {
         position: 'absolute',
         top: '0',
         right: '0',
@@ -104,18 +104,14 @@ function getTaYoutubeBase() {
         left: '0',
         width: '100%',
         height: '100%',
+    }
+
+    new_utilities['.ta-youtube-gradient-dark'] = {
         background:
             'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 100%)',
     }
 
     new_utilities['.ta-youtube-gradient-light'] = {
-        position: 'absolute',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
         background:
             'linear-gradient(0deg, rgba(255,255,255, 0.6) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.6) 100%), linear-gradient(90deg, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.2) 100%)',
     }
