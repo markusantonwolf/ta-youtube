@@ -1,6 +1,6 @@
 {
     "name": "@markusantonwolf/ta-youtube",
-    "version": "2.2.2",
+    "version": "2.2.3",
     "description": "A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player.",
     "main": "src/plugin/index.js",
     "scripts": {
