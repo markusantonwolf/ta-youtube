@@ -84,6 +84,18 @@ function getTaYoutubeBase() {
         alignItems: 'center',
     }
 
+    new_utilities['.ta-youtube-background'] = {
+        position: 'absolute',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        top: '0px',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: '0',
+    }
+
     new_utilities['.ta-youtube-gradient-dark'] = {
         position: 'absolute',
         top: '0',
@@ -128,7 +140,7 @@ function getTaYoutubeAnim() {
         animationName: 'youtube-keyframes-rotate',
         transformOrigin: 'center center',
     }
-    
+
     new_keyframes['@keyframes youtube-keyframes-rotate'] = {
         "0%": {
             transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)'
@@ -146,12 +158,12 @@ function getTaYoutubeAnim() {
             transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)'
         },
     }
-    
+
     new_keyframes['.ta-youtube-anim-toright'] = {
         animationName: 'youtube-keyframes-toright',
         transformOrigin: 'right center',
     }
-    
+
     new_keyframes['@keyframes youtube-keyframes-toright'] = {
         "0%": {
             transform: 'scale(1.3) translateX(0)'
@@ -163,12 +175,12 @@ function getTaYoutubeAnim() {
             transform: 'scale(1.3) translateX(0rem)'
         },
     }
-    
+
     new_keyframes['.ta-youtube-anim-toleft'] = {
         animationName: 'youtube-keyframes-toleft',
         transformOrigin: 'left center',
     }
-    
+
     new_keyframes['@keyframes youtube-keyframes-toleft'] = {
         "0%": {
             transform: 'scale(1.3) translateX(0)'
@@ -180,11 +192,11 @@ function getTaYoutubeAnim() {
             transform: 'scale(1.3) translateX(0rem)'
         },
     }
-    
+
     new_keyframes['.ta-youtube-anim-kenburns'] = {
         animationName: 'youtube-keyframes-kenburns',
     }
-    
+
     new_keyframes['@keyframes youtube-keyframes-kenburns'] = {
         "0%": {
             transform: 'scale(1)'
@@ -196,12 +208,12 @@ function getTaYoutubeAnim() {
             transform: 'scale(1)'
         },
     }
-    
+
     new_keyframes['.ta-youtube-anim-flight'] = {
         animationName: 'youtube-keyframes-flight',
         transformOrigin: 'top center',
     }
-    
+
     new_keyframes['@keyframes youtube-keyframes-flight'] = {
         "0%": {
             transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)'
