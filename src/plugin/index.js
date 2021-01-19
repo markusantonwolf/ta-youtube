@@ -4,13 +4,13 @@ const _ = require('lodash')
 const { paramCase } = require('change-case')
 
 const defaultOptions = {
-    variants: ["responsive"],
+    variants: ['responsive'],
     debug: false,
     export: false,
 }
 
 module.exports = plugin.withOptions((options = {}) => {
-    return function ({ addUtilities }) {
+    return function ({ addComponents }) {
         options = _.defaults({}, options, defaultOptions)
 
         const new_utilities = {}
@@ -36,10 +36,13 @@ module.exports = plugin.withOptions((options = {}) => {
             })
         }
 
-        addUtilities(new_utilities, {
+        addComponents(new_utilities, {
             variants: options.variants,
+            respectPrefix: false,
         })
-        addUtilities(new_keyframes)
+        addComponents(new_keyframes, {
+            respectPrefix: false,
+        })
     }
 })
 
@@ -138,20 +141,20 @@ function getTaYoutubeAnim() {
     }
 
     new_keyframes['@keyframes youtube-keyframes-rotate'] = {
-        "0%": {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)'
+        '0%': {
+            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
         },
-        "25%": {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, -10deg)'
+        '25%': {
+            transform: 'scale(1.3) rotate3d(0, 1, 0, -10deg)',
         },
-        "50%": {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)'
+        '50%': {
+            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
         },
-        "75%": {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, 10deg)'
+        '75%': {
+            transform: 'scale(1.3) rotate3d(0, 1, 0, 10deg)',
         },
-        "100%": {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)'
+        '100%': {
+            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
         },
     }
 
@@ -161,14 +164,14 @@ function getTaYoutubeAnim() {
     }
 
     new_keyframes['@keyframes youtube-keyframes-toright'] = {
-        "0%": {
-            transform: 'scale(1.3) translateX(0)'
+        '0%': {
+            transform: 'scale(1.3) translateX(0)',
         },
-        "50%": {
-            transform: 'scale(1.2) translateX(5rem)'
+        '50%': {
+            transform: 'scale(1.2) translateX(5rem)',
         },
-        "100%": {
-            transform: 'scale(1.3) translateX(0rem)'
+        '100%': {
+            transform: 'scale(1.3) translateX(0rem)',
         },
     }
 
@@ -178,14 +181,14 @@ function getTaYoutubeAnim() {
     }
 
     new_keyframes['@keyframes youtube-keyframes-toleft'] = {
-        "0%": {
-            transform: 'scale(1.3) translateX(0)'
+        '0%': {
+            transform: 'scale(1.3) translateX(0)',
         },
-        "50%": {
-            transform: 'scale(1.2) translateX(-5rem)'
+        '50%': {
+            transform: 'scale(1.2) translateX(-5rem)',
         },
-        "100%": {
-            transform: 'scale(1.3) translateX(0rem)'
+        '100%': {
+            transform: 'scale(1.3) translateX(0rem)',
         },
     }
 
@@ -194,14 +197,14 @@ function getTaYoutubeAnim() {
     }
 
     new_keyframes['@keyframes youtube-keyframes-kenburns'] = {
-        "0%": {
-            transform: 'scale(1)'
+        '0%': {
+            transform: 'scale(1)',
         },
-        "50%": {
-            transform: 'scale(1.1)'
+        '50%': {
+            transform: 'scale(1.1)',
         },
-        "100%": {
-            transform: 'scale(1)'
+        '100%': {
+            transform: 'scale(1)',
         },
     }
 
@@ -211,14 +214,14 @@ function getTaYoutubeAnim() {
     }
 
     new_keyframes['@keyframes youtube-keyframes-flight'] = {
-        "0%": {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)'
+        '0%': {
+            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
         },
-        "50%": {
-            transform: 'scale(1.2) rotate3d(1, 0, 0, 25deg)'
+        '50%': {
+            transform: 'scale(1.2) rotate3d(1, 0, 0, 25deg)',
         },
-        "100%": {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)'
+        '100%': {
+            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
         },
     }
 
