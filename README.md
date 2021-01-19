@@ -20,6 +20,9 @@ For more details about the TA-YouTube take a look at <https://ta-youtube.markusa
 -   Vimeo video wrapper
 -   No privacy issues because Video player loads after pressing playback button
 -   Tailwind CSS plugin
+    - Adds new component to Tailwind CSS
+    - Ignores prefix settings in tailwind.config.js
+    - Default variant activated: responsive
 -   Stores playback state
 -   Customizable animations - CSS animations
 -   Title, description and background images
@@ -41,6 +44,22 @@ module.exports = {
     // ...
     plugins: [
         require('@markusantonwolf/ta-youtube')
+    ]
+}
+```
+
+**To overwrite the default settings like ```variants``` add an object as param to the plugin.** 
+
+```js
+// tailwind.config.js
+module.exports = {
+    // ...
+    plugins: [
+        require('@markusantonwolf/ta-youtube')({
+            variants: ["responsive"], // empty the array if you don't need a responsive variant
+            debug: false, // shows the new component classes in the console while building
+            export: false, // writes the new component classes into files ./public/utilities.css & /public/keyframes.css
+        })
     ]
 }
 ```
