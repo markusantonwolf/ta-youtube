@@ -7,7 +7,7 @@
         "develop": "npx gulp build",
         "build": "NODE_ENV=production npx gulp build",
         "serve": "npx gulp serve",
-        "publish": "npm publish --access public",
+        "upload": "npm publish --access public",
         "patch": "npm version patch",
         "minor": "npm version minor",
         "major": "npm version major"
