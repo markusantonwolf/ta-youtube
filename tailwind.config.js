@@ -11,14 +11,15 @@ module.exports = {
             sans: ['Raleway', 'Helvetica', 'Arial', 'sans-serif'],
             mono: ['"Fira Code"', 'Consolas', 'Monaco', 'Andale', 'Mono', '"Ubuntu Mon"', 'monospace'],
         },
+        taYoutube: {
+            debug: true,
+        },
         extend: {},
     },
-    variants: {},
+    variants: {
+        taYoutube: ['responsive'],
+    },
     plugins: [
-        require('./src/plugin/index.js')({
-            variants: ["responsive"],
-            debug: true,
-            export: true,
-        }),
+        require('./src/plugin/index.js'),
     ],
 }

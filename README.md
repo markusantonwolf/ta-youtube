@@ -48,18 +48,31 @@ module.exports = {
 }
 ```
 
-**To overwrite the default settings like ```variants``` add an object as param to the plugin.** 
+In the following example you can see all available options (default values) for the TA-Youtube plugin for Tailwind CSS. **To add your own configuration add ```taYoutube```to ```theme```and ```variants```.** Your new settings will be merged with the default settings. To change the plugin behaviour in terms of how it adds the new classes as utilities you can add these options as objects to the default function.
 
 ```js
 // tailwind.config.js
 module.exports = {
     // ...
-    plugins: [
-        require('@markusantonwolf/ta-youtube')({
-            variants: ["responsive"], // empty the array if you don't need a responsive variant
+    theme: {
+        // ...
+        taYoutube: {
             debug: false, // shows the new component classes in the console while building
             export: false, // writes the new component classes into files ./public/utilities.css & /public/keyframes.css
-        })
+        },
+        // ...
+    },
+    variants: {
+        // ...
+        taYoutube: ["responsive"], // empty the array if you don't need a responsive variant
+        // ...
+    },
+    // ...
+    plugins: [
+        require('@markusantonwolf/ta-youtube')({
+            respectPrefix: true, // respect prefix option in config: true (default) | false 
+            respectImportant: true, // respect important option in config: true (default) | false 
+        }),
     ]
 }
 ```

@@ -3,15 +3,21 @@ const plugin = require('tailwindcss/plugin')
 const _ = require('lodash')
 const { paramCase } = require('change-case')
 
-const defaultOptions = {
-    variants: ['responsive'],
+const ta_config_defaults = {
     debug: false,
     export: false,
 }
 
+const ta_components_defaults = {
+    variants: ['responsive'],
+    respectPrefix: false,
+    respectImportant: true,
+}
+
 module.exports = plugin.withOptions((options = {}) => {
-    return function ({ addComponents }) {
-        options = _.defaults({}, options, defaultOptions)
+    return function ({ addComponents, theme, variants }) {
+        const ta_config = _.defaultsDeep({}, theme('taYoutube'), ta_config_defaults)
+        const ta_components = _.defaultsDeep(options, { variants: variants('taYoutube') }, ta_components_defaults)
 
         const new_utilities = {}
         const new_keyframes = {}
@@ -19,11 +25,11 @@ module.exports = plugin.withOptions((options = {}) => {
         _.merge(new_utilities, getTaYoutubeBase())
         _.merge(new_keyframes, getTaYoutubeAnim())
 
-        if (options.debug === true) {
+        if (ta_config.debug === true) {
             console.info(new_utilities)
             console.info(new_keyframes)
         }
-        if (options.export === true) {
+        if (ta_config.export === true) {
             fs.writeFile('./public/utilities.css', flattenObject(new_utilities), function (err) {
                 if (err) {
                     return console.log(err)
@@ -36,12 +42,11 @@ module.exports = plugin.withOptions((options = {}) => {
             })
         }
 
-        addComponents(new_utilities, {
-            variants: options.variants,
-            respectPrefix: false,
-        })
+        addComponents(new_utilities, ta_components)
         addComponents(new_keyframes, {
-            respectPrefix: false,
+            variants: [],
+            respectPrefix: ta_components.respectPrefix,
+            respectImportant: ta_components.respectImportant,
         })
     }
 })
