@@ -1,9 +1,12 @@
 const fs = require('fs')
 const plugin = require('tailwindcss/plugin')
+const fnc = require('./functions')
 const _ = require('lodash')
-const { paramCase } = require('change-case')
+const utilities = require('./utilities')
+const keyframes = require('./keyframes')
 
 const ta_config_defaults = {
+    aspect_ratios: [],
     debug: false,
     export: false,
 }
@@ -14,28 +17,90 @@ const ta_components_defaults = {
     respectImportant: true,
 }
 
+const aspect_ratios = {
+    square: 1 / 1,
+    movietone: 6 / 5,
+    large: 5 / 4,
+    tv: 4 / 3,
+    academy: 11 / 8,
+    imax: 1.43 / 1,
+    classic: 3 / 2,
+    still: 3 / 2,
+    modern: 14 / 9,
+    common: 16 / 10,
+    golden: 1.618 / 1,
+    super: 5 / 3,
+    hd: 16 / 9,
+    wide: 1.85 / 1,
+}
+
+if (process.env.NODE_ENV === 'test') {
+    ;(ta_config_defaults.aspect_ratios = ['classic', 'modern', 'common', 'super', 'hd', 'wide', { instagram: 3 / 5 }]),
+        (ta_config = configAspectRatios(ta_config_defaults))
+
+    const new_utilities = {}
+    const new_keyframes = {}
+
+    _.merge(new_utilities, utilities(ta_config))
+    _.merge(new_keyframes, keyframes())
+
+    fs.writeFile('./ta-youtube-utilities.css', fnc.flattenObject(new_utilities), function (err) {
+        if (err) {
+            return console.log(err)
+        }
+    })
+    fs.writeFile('./ta-youtube-keyframes.css', fnc.flattenObject(new_keyframes), function (err) {
+        if (err) {
+            return console.log(err)
+        }
+    })
+    console.info('ta_config', ta_config)
+    console.info('new_utilities', new_utilities)
+    console.info('new_keyframes', new_keyframes)
+}
+
+if (process.env.NODE_ENV === 'production') {
+    for (const key in aspect_ratios) {
+        if (Object.hasOwnProperty.call(aspect_ratios, key)) {
+            ta_config_defaults.aspect_ratios.push(key)
+        }
+    }
+    ta_config = configAspectRatios(ta_config_defaults)
+
+    const new_utilities = {}
+
+    _.merge(new_utilities, utilities(ta_config))
+    _.merge(new_utilities, keyframes())
+
+    fs.writeFile('./src/styles/ta-youtube.css', fnc.flattenObject(new_utilities), function (err) {
+        if (err) {
+            return console.log(err)
+        }
+    })
+}
+
 module.exports = plugin.withOptions((options = {}) => {
     return function ({ addComponents, theme, variants }) {
-        const ta_config = _.defaultsDeep({}, theme('taYoutube'), ta_config_defaults)
+        const ta_config = configAspectRatios(_.defaultsDeep({}, theme('taYoutube'), ta_config_defaults))
         const ta_components = _.defaultsDeep(options, { variants: variants('taYoutube') }, ta_components_defaults)
 
         const new_utilities = {}
         const new_keyframes = {}
 
-        _.merge(new_utilities, getTaYoutubeBase())
-        _.merge(new_keyframes, getTaYoutubeAnim())
+        _.merge(new_utilities, utilities(ta_config))
+        _.merge(new_keyframes, keyframes())
 
         if (ta_config.debug === true) {
             console.info(new_utilities)
             console.info(new_keyframes)
         }
         if (ta_config.export === true) {
-            fs.writeFile('./public/utilities.css', flattenObject(new_utilities), function (err) {
+            fs.writeFile('./public/utilities.css', fnc.flattenObject(new_utilities), function (err) {
                 if (err) {
                     return console.log(err)
                 }
             })
-            fs.writeFile('./public/keyframes.css', flattenObject(new_keyframes), function (err) {
+            fs.writeFile('./public/keyframes.css', fnc.flattenObject(new_keyframes), function (err) {
                 if (err) {
                     return console.log(err)
                 }
@@ -51,214 +116,26 @@ module.exports = plugin.withOptions((options = {}) => {
     }
 })
 
-function getTaYoutubeBase() {
-    const new_utilities = {}
-
-    new_utilities['.ta-youtube'] = {
-        position: 'relative',
-        width: '100%',
-        height: '0px',
-        paddingBottom: 'calc(100% / var(--aspectRatio, 1.78))',
-    }
-
-    new_utilities['.ta-youtube-perspective'] = {
-        perspective: '1000px',
-    }
-
-    new_utilities['.ta-youtube-button'] = {
-        width: 'calc(100% / var(--aspectRatio, 1.78) * 0.3)',
-        height: 'auto',
-    }
-
-    new_utilities['.ta-youtube-title'] = {
-        position: 'absolute',
-        left: '0px',
-        right: '0px',
-        top: '0px',
-        bottom: 'calc(50% + var(--buttonHeight, 100) / 2)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-
-    new_utilities['.ta-youtube-description'] = {
-        position: 'absolute',
-        left: '0px',
-        right: '0px',
-        bottom: '0px',
-        top: 'calc(50% + var(--buttonHeight, 100) / 2)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-
-    new_utilities['.ta-youtube-background'] = {
-        position: 'absolute',
-        left: '0px',
-        right: '0px',
-        bottom: '0px',
-        top: '0px',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        zIndex: '0',
-    }
-
-    new_utilities['.ta-youtube-gradient'] = {
-        position: 'absolute',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-    }
-
-    new_utilities['.ta-youtube-gradient-dark'] = {
-        background:
-            'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 100%)',
-    }
-
-    new_utilities['.ta-youtube-gradient-light'] = {
-        background:
-            'linear-gradient(0deg, rgba(255,255,255, 0.6) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.6) 100%), linear-gradient(90deg, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.2) 100%)',
-    }
-
-    new_utilities['.ta-youtube-anim'] = {
-        animationTimingFunction: 'ease-in-out',
-        animationDelay: '0s',
-        animationFillMode: 'both',
-        animationDuration: '20s',
-        transformOrigin: 'center center',
-        animationIterationCount: 'infinite',
-        backfaceVisibility: 'hidden',
-    }
-
-    return new_utilities
-}
-
-function getTaYoutubeAnim() {
-    const new_keyframes = {}
-
-    new_keyframes['.ta-youtube-anim-rotate'] = {
-        animationName: 'youtube-keyframes-rotate',
-        transformOrigin: 'center center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-rotate'] = {
-        '0%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
-        },
-        '25%': {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, -10deg)',
-        },
-        '50%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
-        },
-        '75%': {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, 10deg)',
-        },
-        '100%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-toright'] = {
-        animationName: 'youtube-keyframes-toright',
-        transformOrigin: 'right center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-toright'] = {
-        '0%': {
-            transform: 'scale(1.3) translateX(0)',
-        },
-        '50%': {
-            transform: 'scale(1.2) translateX(5rem)',
-        },
-        '100%': {
-            transform: 'scale(1.3) translateX(0rem)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-toleft'] = {
-        animationName: 'youtube-keyframes-toleft',
-        transformOrigin: 'left center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-toleft'] = {
-        '0%': {
-            transform: 'scale(1.3) translateX(0)',
-        },
-        '50%': {
-            transform: 'scale(1.2) translateX(-5rem)',
-        },
-        '100%': {
-            transform: 'scale(1.3) translateX(0rem)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-kenburns'] = {
-        animationName: 'youtube-keyframes-kenburns',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-kenburns'] = {
-        '0%': {
-            transform: 'scale(1)',
-        },
-        '50%': {
-            transform: 'scale(1.1)',
-        },
-        '100%': {
-            transform: 'scale(1)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-flight'] = {
-        animationName: 'youtube-keyframes-flight',
-        transformOrigin: 'top center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-flight'] = {
-        '0%': {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
-        },
-        '50%': {
-            transform: 'scale(1.2) rotate3d(1, 0, 0, 25deg)',
-        },
-        '100%': {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
-        },
-    }
-
-    return new_keyframes
-}
-
-function flattenObject(ob) {
-    var toReturn = ''
-    for (var a in ob) {
-        toReturn += a + ' '
-        if (typeof ob[a] == 'object' && ob[a] !== null) {
-            toReturn += '{' + '\n'
-            for (var b in ob[a]) {
-                var output = ob[a][b]
-                if (_.isObject(ob[a][b])) {
-                    output = '\t{' + '\n'
-                    for (var c in ob[a][b]) {
-                        output += '\t\t' + c + ': ' + ob[a][b][c] + ';\n'
-                    }
-                    output += '\t}' + '\n'
-                }
-                if (b.substring(0, 2) === '--') {
-                    toReturn += '\t' + b + ': ' + output + ';\n'
-                } else if (b.indexOf('%') !== -1) {
-                    toReturn += '\t' + b + ' ' + output
-                } else {
-                    toReturn += '\t' + paramCase(b) + ': ' + output + ';\n'
+function configAspectRatios(config) {
+    let index = 0
+    for (index = 0; index < config.aspect_ratios.length; index++) {
+        if (typeof config.aspect_ratios[index] === 'string') {
+            if (typeof aspect_ratios[config.aspect_ratios[index]] !== 'undefined') {
+                config.aspect_ratios[index] = {
+                    name: config.aspect_ratios[index],
+                    value: aspect_ratios[config.aspect_ratios[index]],
                 }
             }
-            toReturn += '}' + '\n'
+        } else {
+            for (const key in config.aspect_ratios[index]) {
+                if (Object.hasOwnProperty.call(config.aspect_ratios[index], key)) {
+                    config.aspect_ratios[index] = {
+                        name: key,
+                        value: config.aspect_ratios[index][key],
+                    }
+                }
+            }
         }
-        toReturn += '\n'
     }
-    return toReturn
+    return config
 }

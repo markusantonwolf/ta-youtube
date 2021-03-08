@@ -8,7 +8,7 @@ window.taYoutube = function () {
             source: 'youtube',
             remember: 'true',
             autoplay: 'false',
-            aspect_ratio: '1.78',
+            aspect_ratio: 'false',
             start_at: '',
             end_at: '',
             button: 'button',
@@ -27,7 +27,7 @@ window.taYoutube = function () {
                     this.options[key] = value
                 }
             }
-            
+
             // checks if options are defined by data
             for (let [key, value] of Object.entries(this.$el.dataset)) {
                 if (typeof this.options[key] !== 'undefined') {
@@ -42,7 +42,9 @@ window.taYoutube = function () {
             }
 
             // set aspect ratio as CSS custom property
-            this.$el.style.setProperty(`--aspectRatio`, parseFloat(this.options.aspect_ratio))
+            if (String(this.options.aspect_ratio).toLowerCase() !== 'false' ) {
+                this.$el.style.setProperty(`--ta-youtube-aspect-ratio`, parseFloat(this.options.aspect_ratio))
+            }
 
             // define the url without query string for hash
             this.hash = this.hashCode(window.location.href) + '_' + this.hashCode(this.url)
@@ -97,7 +99,7 @@ window.taYoutube = function () {
         setButtonHeight() {
             // defines the height of the playback button as CSS custom property
             const button_height = this.$refs[this.options.button].offsetHeight
-            this.$el.style.setProperty(`--buttonHeight`, button_height + 'px')
+            this.$el.style.setProperty(`--ta-youtube-buttonHeight`, button_height + 'px')
         },
         hashCode(string) {
             var hash = 0,
