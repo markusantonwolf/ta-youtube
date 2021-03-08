@@ -13,7 +13,6 @@ module.exports = {
         },
         taYoutube: {
             debug: false,
-            aspect_ratios: ['tv', 'wide', 'hd', 'super', 'common', 'modern'],
         },
         extend: {},
     },
