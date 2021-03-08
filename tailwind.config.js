@@ -12,14 +12,13 @@ module.exports = {
             mono: ['"Fira Code"', 'Consolas', 'Monaco', 'Andale', 'Mono', '"Ubuntu Mon"', 'monospace'],
         },
         taYoutube: {
-            debug: true,
+            debug: false,
+            aspect_ratios: ['tv', 'wide', 'hd', 'super', 'common', 'modern'],
         },
         extend: {},
     },
     variants: {
         taYoutube: ['responsive'],
     },
-    plugins: [
-        require('./src/plugin/index.js'),
-    ],
+    plugins: [require('./src/plugin/index.js')],
 }

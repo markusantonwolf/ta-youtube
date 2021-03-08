@@ -32,12 +32,6 @@ const styles_ta_plugin = () => {
     const postcssOptions = [require('tailwindcss'), require('autoprefixer')]
     if (process.env.NODE_ENV === 'production') {
         postcssOptions.push(
-            purgecss({
-                content: PURGE_CONTENT,
-                defaultExtractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
-            })
-        )
-        postcssOptions.push(
             require('cssnano')({
                 preset: 'default',
             })

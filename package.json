@@ -4,7 +4,9 @@
     "description": "A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player.",
     "main": "src/plugin/index.js",
     "scripts": {
+        "test": "NODE_ENV=test node ./src/plugin/index.js",
         "develop": "npx gulp build",
+        "prebuild": "NODE_ENV=production node ./src/plugin/index.js",
         "build": "NODE_ENV=production npx gulp build",
         "serve": "npx gulp serve",
         "upload": "npm publish --access public",
