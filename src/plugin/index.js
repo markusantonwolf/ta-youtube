@@ -60,11 +60,6 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    for (const key in aspect_ratios) {
-        if (Object.hasOwnProperty.call(aspect_ratios, key)) {
-            ta_config_defaults.aspect_ratios.push(key)
-        }
-    }
     ta_config = configAspectRatios(ta_config_defaults)
 
     const new_utilities = {}
@@ -117,6 +112,14 @@ module.exports = plugin.withOptions((options = {}) => {
 })
 
 function configAspectRatios(config) {
+    if (config.aspect_ratios.length === 0) {
+        for (const key in aspect_ratios) {
+            if (Object.hasOwnProperty.call(aspect_ratios, key)) {
+                config.aspect_ratios.push(key)
+            }
+        }
+    }
+
     let index = 0
     for (index = 0; index < config.aspect_ratios.length; index++) {
         if (typeof config.aspect_ratios[index] === 'string') {
