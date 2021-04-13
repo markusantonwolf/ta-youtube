@@ -1,95 +1,74 @@
-module.exports = () => {
-    const new_keyframes = {}
+const animations = require('./keyframes.json');
 
-    new_keyframes['.ta-youtube-anim-rotate'] = {
-        animationName: 'youtube-keyframes-rotate',
-        transformOrigin: 'center center',
+module.exports = (config) => {
+    var new_keyframes = {};
+
+    for (const property in animations) {
+        if (config.animations.indexOf(property) !== -1) {
+            new_keyframes['@keyframes ta-pagination-' + property + '-right-in'] = {
+                from: {
+                    opacity: '0',
+                    ...animations[property].rightIn,
+                },
+                to: {
+                    opacity: '1',
+                    ...animations[property].default,
+                },
+            };
+            new_keyframes['@keyframes ta-pagination-' + property + '-right-out'] = {
+                from: {
+                    opacity: '1',
+                    ...animations[property].default,
+                },
+                to: {
+                    opacity: '0',
+                    ...animations[property].rightOut,
+                },
+            };
+            new_keyframes['@keyframes ta-pagination-' + property + '-left-in'] = {
+                from: {
+                    opacity: '0',
+                    ...animations[property].leftIn,
+                },
+                to: {
+                    opacity: '1',
+                    ...animations[property].default,
+                },
+            };
+            new_keyframes['@keyframes ta-pagination-' + property + '-left-out'] = {
+                from: {
+                    opacity: '1',
+                    ...animations[property].default,
+                },
+                to: {
+                    opacity: '0',
+                    ...animations[property].leftOut,
+                },
+            };
+        }
     }
 
-    new_keyframes['@keyframes youtube-keyframes-rotate'] = {
-        '0%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
+    new_keyframes['@keyframes ta-pagination-anim-expand'] = {
+        from: {
+            opacity: '0',
+            transform: 'scale(0.8) rotate3d(1, 0, 0, -180deg) translateZ(0) translateY(-2rem)',
         },
-        '25%': {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, -10deg)',
+        to: {
+            opacity: '1',
+            transform: 'scale(1) rotate3d(1, 0, 0, 0deg) translateZ(0) translateY(0rem)',
         },
-        '50%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
-        },
-        '75%': {
-            transform: 'scale(1.3) rotate3d(0, 1, 0, 10deg)',
-        },
-        '100%': {
-            transform: 'scale(1.2) rotate3d(0, 1, 0, 0deg)',
-        },
-    }
+    };
 
-    new_keyframes['.ta-youtube-anim-toright'] = {
-        animationName: 'youtube-keyframes-toright',
-        transformOrigin: 'right center',
-    }
+    new_keyframes['@keyframes ta-pagination-anim-shrink'] = {
+        from: {
+            opacity: '1',
+            transform: 'scale(1) rotate3d(1, 0, 0, 0deg) translateZ(0) translateY(0rem)',
+        },
+        to: {
+            opacity: '0',
+            transform: 'scale(0.8) rotate3d(1, 0, 0, -180deg) translateZ(0) translateY(-2rem)',
+        },
+    };
 
-    new_keyframes['@keyframes youtube-keyframes-toright'] = {
-        '0%': {
-            transform: 'scale(1.3) translateX(0)',
-        },
-        '50%': {
-            transform: 'scale(1.2) translateX(5rem)',
-        },
-        '100%': {
-            transform: 'scale(1.3) translateX(0rem)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-toleft'] = {
-        animationName: 'youtube-keyframes-toleft',
-        transformOrigin: 'left center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-toleft'] = {
-        '0%': {
-            transform: 'scale(1.3) translateX(0)',
-        },
-        '50%': {
-            transform: 'scale(1.2) translateX(-5rem)',
-        },
-        '100%': {
-            transform: 'scale(1.3) translateX(0rem)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-kenburns'] = {
-        animationName: 'youtube-keyframes-kenburns',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-kenburns'] = {
-        '0%': {
-            transform: 'scale(1)',
-        },
-        '50%': {
-            transform: 'scale(1.1)',
-        },
-        '100%': {
-            transform: 'scale(1)',
-        },
-    }
-
-    new_keyframes['.ta-youtube-anim-flight'] = {
-        animationName: 'youtube-keyframes-flight',
-        transformOrigin: 'top center',
-    }
-
-    new_keyframes['@keyframes youtube-keyframes-flight'] = {
-        '0%': {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
-        },
-        '50%': {
-            transform: 'scale(1.2) rotate3d(1, 0, 0, 25deg)',
-        },
-        '100%': {
-            transform: 'scale(1.1) rotate3d(1, 0, 0, 0deg)',
-        },
-    }
-
-    return new_keyframes
-}
+    return new_keyframes;
+};
