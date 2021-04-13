@@ -1,7 +1,7 @@
 {
-    "name": "@markusantonwolf/ta-pagination",
-    "version": "1.0.3",
-    "description": "A light-weight, responsive and mobile first content, image, article and product pagination for every kind of application.",
+    "name": "@markusantonwolf/ta-youtube",
+    "version": "2.5.1",
+    "description": "A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player.",
     "main": "src/plugin/index.js",
     "scripts": {
         "test": "NODE_ENV=test node ./src/plugin/index.js",
@@ -19,21 +19,22 @@
         "email": "hello@markusantonwolf.com",
         "url": "https://www.markusantonwolf.com/en/"
     },
-    "homepage": "https://github.com/markusantonwolf/ta-pagination#readme",
+    "homepage": "https://github.com/markusantonwolf/ta-youtube#readme",
     "bugs": {
-        "url": "https://github.com/markusantonwolf/ta-pagination/issues"
+        "url": "https://github.com/markusantonwolf/ta-youtube/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/markusantonwolf/ta-pagination.git"
+        "url": "git+https://github.com/markusantonwolf/ta-youtube.git"
     },
     "keywords": [
         "tailwindcss",
         "css",
         "tailwind",
+        "youtube",
         "alpinejs",
         "alpine",
-        "pagination",
+        "privacy",
         "tailwindcss-plugin"
     ],
     "license": "MIT",
@@ -61,6 +62,6 @@
         "gulp-minify": "^3.1.0",
         "gulp-postcss": "^9.0.0",
         "gulp-print": "^5.0.2",
-        "tailwindcss": "^1.8.3"
+        "tailwindcss": "^1.0.0"
     }
 }

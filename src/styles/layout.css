@@ -52,7 +52,3 @@ a {
   background: radial-gradient(circle at 30% 30%, #d250a2, #97266d);
   @apply text-white border-pink-900 transform scale-110;
 }
-
-[x-cloak] {
-  display: none;
-}

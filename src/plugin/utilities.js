@@ -1,115 +1,94 @@
-const fnc = require('./functions');
-const animations = require('./keyframes.json');
+module.exports = (config) => {
+    const new_utilities = {}
 
-module.exports = (config, e) => {
-    var new_utilities = {};
-
-    new_utilities['.ta-pagination'] = {
-        '--ta-pagination-item-height': 'unset',
-        '--ta-pagination-navigation-height': 'unset',
-        '--ta-pagination-anim-right-in': 'ta-pagination-' + config.animation_default + '-right-in',
-        '--ta-pagination-anim-right-out':
-            'ta-pagination-' + config.animation_default + '-right-out',
-        '--ta-pagination-anim-left-in': 'ta-pagination-' + config.animation_default + '-left-in',
-        '--ta-pagination-anim-left-out': 'ta-pagination-' + config.animation_default + '-left-out',
-        '--ta-pagination-anim-shrink': 'ta-pagination-anim-shrink',
-        '--ta-pagination-anim-expand': 'ta-pagination-anim-expand',
-        '--ta-pagination-anim-duration': '200ms',
+    new_utilities['.ta-youtube'] = {
+        '--ta-youtube-aspect-ratio': '1.78',
         position: 'relative',
+        width: '100%',
+        maxWidth: 'var(--ta-youtube-width, 100%)',
+        height: '0px',
+        paddingBottom: 'calc(100% / var(--ta-youtube-aspect-ratio))',
         perspective: '1000px',
-        perspectiveOrigin: 'center center',
-    };
+    }
 
-    new_utilities['.ta-pagination-item'] = {
-        position: 'relative',
-        height: 'var(--ta-pagination-item-height)',
+    let index = 0
+    for (index = 0; index < config.aspect_ratios.length; index++) {
+        new_utilities['.ta-youtube-aspect-' + config.aspect_ratios[index].name] = {
+            '--ta-youtube-aspect-ratio': Number.parseFloat(config.aspect_ratios[index].value).toFixed(3),
+            '--ta-youtube-width': '100%',
+            height: '0px',
+            paddingBottom: 'calc(100% / var(--ta-youtube-aspect-ratio))',
+        }
+    }
+
+    new_utilities['.ta-youtube-button'] = {
+        width: 'calc(100% / var(--ta-youtube-aspect-ratio) * 0.3)',
+        height: 'auto',
+    }
+
+    new_utilities['.ta-youtube-title'] = {
+        position: 'absolute',
+        left: '0px',
+        right: '0px',
+        top: '0px',
+        bottom: 'calc(50% + var(--ta-youtube-buttonHeight, 100) / 2)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+
+    new_utilities['.ta-youtube-description'] = {
+        position: 'absolute',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        top: 'calc(50% + var(--ta-youtube-buttonHeight, 100) / 2)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+
+    new_utilities['.ta-youtube-background'] = {
+        position: 'absolute',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        top: '0px',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: '0',
+    }
+
+    new_utilities['.ta-youtube-gradient'] = {
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        bottom: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+    }
+
+    new_utilities['.ta-youtube-gradient-dark'] = {
+        background:
+            'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 100%)',
+    }
+
+    new_utilities['.ta-youtube-gradient-light'] = {
+        background:
+            'linear-gradient(0deg, rgba(255,255,255, 0.6) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.6) 100%), linear-gradient(90deg, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.2) 100%)',
+    }
+
+    new_utilities['.ta-youtube-anim'] = {
         animationTimingFunction: 'ease-in-out',
         animationDelay: '0s',
         animationFillMode: 'both',
-        animationDuration: 'var(--ta-pagination-anim-duration)',
+        animationDuration: '20s',
+        transformOrigin: 'center center',
+        animationIterationCount: 'infinite',
         backfaceVisibility: 'hidden',
-    };
-
-    new_utilities['.ta-pagination-lazy'] = {
-        objectFit: 'contain',
-    };
-
-    new_utilities['.ta-pagination-navigation'] = {
-        height: 'var(--ta-pagination-navigation-height)',
-    };
-
-    new_utilities['.ta-pagination-item-hidden'] = {
-        display: 'none !important',
-    };
-
-    new_utilities['.ta-pagination-item-border::before'] = {
-        content: '""',
-        position: 'absolute',
-        left: '-3rem',
-        top: '-1rem',
-        bottom: '-1rem',
-        borderLeft: '2px dashed rgb(94, 101, 104)',
-    };
-
-    for (index = 0; index < config.animations.length; index++) {
-        const animation = {
-            '--ta-pagination-anim-right-in':
-                'ta-pagination-' + config.animations[index] + '-right-in',
-            '--ta-pagination-anim-right-out':
-                'ta-pagination-' + config.animations[index] + '-right-out',
-            '--ta-pagination-anim-left-in':
-                'ta-pagination-' + config.animations[index] + '-left-in',
-            '--ta-pagination-anim-left-out':
-                'ta-pagination-' + config.animations[index] + '-left-out',
-        };
-        if (typeof animations[config.animations[index]] !== 'undefined') {
-            if (typeof animations[config.animations[index]].origin !== 'undefined') {
-                animation['--ta-pagination-origin-right-in'] =
-                    animations[config.animations[index]].origin.rightIn;
-                animation['--ta-pagination-origin-right-out'] =
-                    animations[config.animations[index]].origin.rightOut;
-                animation['--ta-pagination-origin-left-in'] =
-                    animations[config.animations[index]].origin.leftIn;
-                animation['--ta-pagination-origin-left-out'] =
-                    animations[config.animations[index]].origin.leftOut;
-            }
-        }
-        new_utilities['.ta-pagination-anim-' + config.animations[index]] = animation;
     }
 
-    new_utilities['.ta-pagination-anim-right-in'] = {
-        transformOrigin: 'var(--ta-pagination-origin-right-in)',
-        animationName: 'var(--ta-pagination-anim-right-in)',
-        opacity: 0.2,
-    };
-
-    new_utilities['.ta-pagination-anim-right-out'] = {
-        transformOrigin: 'var(--ta-pagination-origin-right-out)',
-        animationName: 'var(--ta-pagination-anim-right-out)',
-        opacity: 1,
-    };
-
-    new_utilities['.ta-pagination-anim-left-in'] = {
-        transformOrigin: 'var(--ta-pagination-origin-left-in)',
-        animationName: 'var(--ta-pagination-anim-left-in)',
-        opacity: 0.2,
-    };
-
-    new_utilities['.ta-pagination-anim-left-out'] = {
-        transformOrigin: 'var(--ta-pagination-origin-left-out)',
-        animationName: 'var(--ta-pagination-anim-left-out)',
-        opacity: 1,
-    };
-
-    new_utilities['.ta-pagination-anim-expand'] = {
-        animationName: 'var(--ta-pagination-anim-expand)',
-        opacity: 1,
-    };
-
-    new_utilities['.ta-pagination-anim-shrink'] = {
-        animationName: 'var(--ta-pagination-anim-shrink)',
-        opacity: 0.2,
-    };
-
-    return new_utilities;
-};
+    return new_utilities
+}

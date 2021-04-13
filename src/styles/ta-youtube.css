@@ -1,0 +1,265 @@
+.ta-youtube {
+	--ta-youtube-aspect-ratio: 1.78;
+	position: relative;
+	width: 100%;
+	max-width: var(--ta-youtube-width, 100%);
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+	perspective: 1000px;
+}
+
+.ta-youtube-aspect-square {
+	--ta-youtube-aspect-ratio: 1.000;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-movietone {
+	--ta-youtube-aspect-ratio: 1.200;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-large {
+	--ta-youtube-aspect-ratio: 1.250;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-tv {
+	--ta-youtube-aspect-ratio: 1.333;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-academy {
+	--ta-youtube-aspect-ratio: 1.375;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-imax {
+	--ta-youtube-aspect-ratio: 1.430;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-classic {
+	--ta-youtube-aspect-ratio: 1.500;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-still {
+	--ta-youtube-aspect-ratio: 1.500;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-modern {
+	--ta-youtube-aspect-ratio: 1.556;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-common {
+	--ta-youtube-aspect-ratio: 1.600;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-golden {
+	--ta-youtube-aspect-ratio: 1.618;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-super {
+	--ta-youtube-aspect-ratio: 1.667;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-hd {
+	--ta-youtube-aspect-ratio: 1.778;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-aspect-wide {
+	--ta-youtube-aspect-ratio: 1.850;
+	--ta-youtube-width: 100%;
+	height: 0px;
+	padding-bottom: calc(100% / var(--ta-youtube-aspect-ratio));
+}
+
+.ta-youtube-button {
+	width: calc(100% / var(--ta-youtube-aspect-ratio) * 0.3);
+	height: auto;
+}
+
+.ta-youtube-title {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: calc(50% + var(--ta-youtube-buttonHeight, 100) / 2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ta-youtube-description {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: calc(50% + var(--ta-youtube-buttonHeight, 100) / 2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ta-youtube-background {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.ta-youtube-gradient {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.ta-youtube-gradient-dark {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.ta-youtube-gradient-light {
+	background: linear-gradient(0deg, rgba(255,255,255, 0.6) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.6) 100%), linear-gradient(90deg, rgba(255,255,255, 0.2) 0%, rgba(255,255,255, 0) 50%, rgba(255,255,255, 0.2) 100%);
+}
+
+.ta-youtube-anim {
+	animation-timing-function: ease-in-out;
+	animation-delay: 0s;
+	animation-fill-mode: both;
+	animation-duration: 20s;
+	transform-origin: center center;
+	animation-iteration-count: infinite;
+	backface-visibility: hidden;
+}
+
+.ta-youtube-anim-rotate {
+	animation-name: youtube-keyframes-rotate;
+	transform-origin: center center;
+}
+
+@keyframes youtube-keyframes-rotate {
+	0% 	{
+		transform: scale(1.2) rotate3d(0, 1, 0, 0deg);
+	}
+	25% 	{
+		transform: scale(1.3) rotate3d(0, 1, 0, -10deg);
+	}
+	50% 	{
+		transform: scale(1.2) rotate3d(0, 1, 0, 0deg);
+	}
+	75% 	{
+		transform: scale(1.3) rotate3d(0, 1, 0, 10deg);
+	}
+	100% 	{
+		transform: scale(1.2) rotate3d(0, 1, 0, 0deg);
+	}
+}
+
+.ta-youtube-anim-toright {
+	animation-name: youtube-keyframes-toright;
+	transform-origin: right center;
+}
+
+@keyframes youtube-keyframes-toright {
+	0% 	{
+		transform: scale(1.3) translateX(0);
+	}
+	50% 	{
+		transform: scale(1.2) translateX(5rem);
+	}
+	100% 	{
+		transform: scale(1.3) translateX(0rem);
+	}
+}
+
+.ta-youtube-anim-toleft {
+	animation-name: youtube-keyframes-toleft;
+	transform-origin: left center;
+}
+
+@keyframes youtube-keyframes-toleft {
+	0% 	{
+		transform: scale(1.3) translateX(0);
+	}
+	50% 	{
+		transform: scale(1.2) translateX(-5rem);
+	}
+	100% 	{
+		transform: scale(1.3) translateX(0rem);
+	}
+}
+
+.ta-youtube-anim-kenburns {
+	animation-name: youtube-keyframes-kenburns;
+}
+
+@keyframes youtube-keyframes-kenburns {
+	0% 	{
+		transform: scale(1);
+	}
+	50% 	{
+		transform: scale(1.1);
+	}
+	100% 	{
+		transform: scale(1);
+	}
+}
+
+.ta-youtube-anim-flight {
+	animation-name: youtube-keyframes-flight;
+	transform-origin: top center;
+}
+
+@keyframes youtube-keyframes-flight {
+	0% 	{
+		transform: scale(1.1) rotate3d(1, 0, 0, 0deg);
+	}
+	50% 	{
+		transform: scale(1.2) rotate3d(1, 0, 0, 25deg);
+	}
+	100% 	{
+		transform: scale(1.1) rotate3d(1, 0, 0, 0deg);
+	}
+}
+

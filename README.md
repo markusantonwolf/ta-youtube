@@ -1,99 +1,196 @@
 <p align="center">
-  <img src="https://github.com/markusantonwolf/ta-youtube/raw/master/public/img/logo-ta-pagination.png" width="400px" />
+  <img src="https://github.com/markusantonwolf/ta-youtube/raw/master/public/img/logo-ta-youtube.png" width="400px" />
 </p>
 
-# **TA-Pagination** - content, article and product pagination
+# TA-YouTube
 
-**A light-weight, responsive and mobile first content, image, article and product pagination for every kind of application.**
+A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player. Perfect for solving data protection issues in some countries as the YouTube / Vimeo player loads after the visitor presses the play button.
 
-TA-Pagination is designed to fit in every project, in every grid and in every flexbox layout. Thanks to Tailwind CSS everything is customizable and it is very easy to add your own transitions to TA-Pagination if you want to. If you are familiar with Tailwind CSS and Alpine JS you might consider using TA-Pagination. so try it out and if you have some feedback - leave me a message: [@markusantonwolf](https://twitter.com/markusantonwolf) / Twitter.
+TA-YouTube is based on Alpine JS and Tailwind CSS. 100% customizable and with endless animation options. If you already use Alpine JS and Tailwind CSS in your project you might consider using this video wrapper to avoid autoload the YouTube player and solve privacy issues.
 
-## Documentation and Examples
+## Demos and documentation
 
-[Documentation](https://ta-styled-plugins.com/ta-pagination/)
+[DEMO](https://ta-youtube.markusantonwolf.com) | [DOCU](https://ta-youtube.markusantonwolf.com) | [REALWORLD](https://www.markusantonwolf.com/en/blog/alpine-js)
 
-[Getting started](https://ta-styled-plugins.com/ta-pagination/getting-started/)
-
-[Examples](https://ta-styled-plugins.com/ta-pagination/examples/)
+For more details about the TA-YouTube take a look at <https://ta-youtube.markusantonwolf.com> and if you want to see a real world example you can find it on my homepage: <https://www.markusantonwolf.com/en/blog/alpine-js>
 
 ## Features
 
--   Paginate every content - Choose every kind of content, image, text, table or list.
--   Transitions - You can change the transition for every slide.
--   Autoplay mode - Control the pagination the way you want to
--   Responsive - Define the pagination based on breakpoints
--   Unify heights - Smooth transitions and stable heights of all items
--   Based on Alpine JS - Small footprint and Vue JS inspired, like Tailwind for JavaScript
--   100% Tailwind CSS - Rapidly build modern websites without leaving your HTML
+-   YouTube video wrapper
+-   Vimeo video wrapper
+-   No privacy issues because Video player loads after pressing playback button
+-   Tailwind CSS plugin
+    - Adds new component to Tailwind CSS
+    - Ignores prefix settings in tailwind.config.js
+    - Default variant activated: responsive
+-   Stores playback state
+-   Customizable animations - CSS animations
+-   Title, description and background images
+-   Small file sizes JS = 3,3 kByte
+-   CSS + Animation = 1,4 kByte
+-   Based on Alpine JS and Tailwind CSS
 
 ## Install
 
 **From npm:** Install the package.
-
-```bash
-# Install using npm
-
-npm install --save-dev @markusantonwolf/ta-pagination
-
-# Install using yarn
-
-yarn add -D @markusantonwolf/ta-pagination
+```js
+npm install @markusantonwolf/ta-youtube
 ```
 
-## Tailwind CSS plugin
+**Inside tailwind.config.js:** Add the plugin to your tailwind css config file.
+```js
+// tailwind.config.js
+module.exports = {
+    // ...
+    plugins: [
+        require('@markusantonwolf/ta-youtube')
+    ]
+}
+```
 
-**You can find the complete documentation of the plugin on this page: [Tailwind CSS plugin](https://ta-styled-plugins.com/ta-pagination/tailwind-css-plugin/).**
+In the following example you can see all available options (default values) for the TA-Youtube plugin for Tailwind CSS. **To add your own configuration add ```taYoutube```to ```theme```and ```variants```.** Your new settings will be merged with the default settings. To change the plugin behaviour in terms of how it adds the new classes as utilities you can add these options as objects to the default function.
 
 ```js
 // tailwind.config.js
-
-const ta_pagination_safelist = require('./node_modules/@markusantonwolf/ta-pagination/src/plugin/safelist');
-
 module.exports = {
-    purge: {
-        // ...
-        options: {
-            safelist: [...ta_pagination_safelist],
-        },
-        // ...
-    },
     // ...
     theme: {
         // ...
-        taPagination: {
-            animations: [
-                'swing',
-                'spin',
-                'swipe',
-                'fade',
-                'slide',
-                'rotate',
-                'snake',
-                'window',
-                'scroll',
-                'fold'
-            ],
-            animation_default: 'swing', // default value
+        taYoutube: {
+            debug: false, // shows the new component classes in the console while building
+            export: false, // writes the new component classes into files ./public/utilities.css & /public/keyframes.css
         },
         // ...
     },
-    // ...
     variants: {
         // ...
-        taPagination: ['responsive'], // default value
-        extend: {
-            // ...
-        },
+        taYoutube: ["responsive"], // empty the array if you don't need a responsive variant
+        // ...
     },
     // ...
     plugins: [
-        require('@markusantonwolf/ta-pagination')({
+        require('@markusantonwolf/ta-youtube')({
             respectPrefix: true, // respect prefix option in config: true (default) | false 
             respectImportant: true, // respect important option in config: true (default) | false 
         }),
     ]
-    // ...
 }
+```
+
+## CDN
+
+### TA-YouTube
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@latest/dist/js/ta-youtube.min.js"></script>
+```
+
+### Alpine JS + TA-YouTube
+
+```html
+<script
+    src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-foodtrucks@latest/dist/js/alpine-ta-youtube.min.js"
+    defer
+></script>
+```
+
+### TA-YouTube old version 1.x
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@1.02/dist/js/youtube.js"></script>
+```
+
+
+## Options
+
+All options you can define
+
+```javascript
+// endpoint url - based on Craftplaces Api service
+init('2ux2H_Iddvc', {
+    
+    // source default is youtube - alternative is vimeo
+    source: 'youtube',
+    
+    // store the play state to the local storage
+    remember: 'true',
+    
+    // starts playing right after clicking
+    autoplay: 'false',
+    
+    // aspect ratio of the video
+    aspect_ratio: '1.78',
+    
+    // start position in seconds
+    start_at: '',
+    
+    // end position in seconds
+    end_at: '',
+    
+    // change the default class name for the button
+    button: 'button',
+
+})
+```
+
+You can define all options as an object inside the init() function - like this example.
+
+```html
+<div
+    class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+    x-data="taYoutube()"
+    x-init="init('2ux2H_Iddvc', {remember:'false',autoplay: 'true',start_at: 10,end_at:220})"
+>
+    <a
+        href="play"
+        class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
+        x-on:click.prevent="show()"
+        x-show="!active"
+    >
+        <!-- CONTENT -->
+    </a>
+    <template x-if="active">
+        <iframe
+            class="absolute inset-0 w-full h-full"
+            :src="url"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+    </template>
+</div>
+```
+
+Alternativly you can define all options as data attributes - like this example.
+
+```html
+<div
+    class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+    x-data="taYoutube()"
+    x-init="init()"
+    data-id="51018360"
+    data-source="vimeo"
+    data-remember="false"
+    data-autoplay="true"
+>
+    <a
+        href="play"
+        class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
+        x-on:click.prevent="show()"
+        x-show="!active"
+    >
+        <!-- CONTENT -->
+    </a>
+    <template x-if="active">
+        <iframe
+            class="absolute inset-0 w-full h-full"
+            :src="url"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+    </template>
+</div>
 ```
 
 ## Local development
@@ -118,15 +215,19 @@ npm run build
 
 ## All TA StyledPlugins
 
-[TA-Styled-Plugins](https://ta-styled-plugins.com/) - Explore all Tailwind CSS and Alpine JS styled plugins and learn how to enhance your website fast and easy.
+-   [TA-Gallery](https://github.com/markusantonwolf/ta-gallery) - An image gallery with endless animation options.
+-   [TA-Pagination](https://github.com/markusantonwolf/ta-pagination) - A content pagination solution.
+-   [TA-Youtube](https://github.com/markusantonwolf/ta-youtube) - A YouTube video wrapper with auto playback and aspect ratio for the video player.
+-   [TA-Analytics](https://github.com/markusantonwolf/ta-analytics) - A plugin for every website that needs to have an easy and customizable Google Analytics “blocker”.
+-   [TA-Foodtrucks](https://github.com/markusantonwolf/ta-foodtrucks) - A plugin to show the next food truck and street food dates in your area.
 
 ## Licence
 
-TA Pagination is released under the [MIT license](https://github.com/markusantonwolf/ta-pagination/blob/master/licence.md) & supports modern environments.
+TA YouTube is released under the [MIT license](https://github.com/markusantonwolf/ta-youtube/blob/master/licence.md) & supports modern environments.
 
 ## Copyright
 
-© 2021 Markus A. Wolf
+© 2020 Markus A. Wolf
 <https://www.markusantonwolf.com>
 
-<img src="https://github.com/markusantonwolf/ta-pagination/raw/master/public/img/logo-ta-styled-plugins.png" width="200px" style="padding-top:2rem;" />
+<img src="https://github.com/markusantonwolf/ta-youtube/raw/master/public/img/logo-ta-styled-plugins.png" width="200px" style="padding-top:2rem;" />
