@@ -2,57 +2,61 @@
   <img src="https://github.com/markusantonwolf/ta-youtube/raw/master/public/img/logo-ta-youtube.png" width="400px" />
 </p>
 
-# TA-YouTube
+# **TA-YouTube** - mobile first video wrapper with aspect ratio
 
-A light-weight, responsive and mobile first YouTube and Vimeo video wrapper with auto playback and aspect ratio for the video player. Perfect for solving data protection issues in some countries as the YouTube / Vimeo player loads after the visitor presses the play button.
+**A light-weight, responsive and mobile first YouTube / Vimeo video wrapper with auto playback and aspect ratio for the video player.**
 
-TA-YouTube is based on Alpine JS and Tailwind CSS. 100% customizable and with endless animation options. If you already use Alpine JS and Tailwind CSS in your project you might consider using this video wrapper to avoid autoload the YouTube player and solve privacy issues.
+## Demos, Documentation and Examples
 
-## Demos and documentation
+[Documentation](https://ta-styled-plugins.com/ta-youtube/)
 
-[DEMO](https://ta-youtube.markusantonwolf.com) | [DOCU](https://ta-youtube.markusantonwolf.com) | [REALWORLD](https://www.markusantonwolf.com/en/blog/alpine-js)
+[Getting started](https://ta-styled-plugins.com/ta-youtube/getting-started/)
 
-For more details about the TA-YouTube take a look at <https://ta-youtube.markusantonwolf.com> and if you want to see a real world example you can find it on my homepage: <https://www.markusantonwolf.com/en/blog/alpine-js>
+[Examples](https://ta-styled-plugins.com/ta-youtube/examples/)
+
+[Configuration](https://ta-styled-plugins.com/ta-youtube/configuration/)
+
+[Tailwind CSS plugin](https://ta-styled-plugins.com/ta-youtube/tailwind-css-plugin/)
 
 ## Features
 
--   YouTube video wrapper
--   Vimeo video wrapper
--   No privacy issues because Video player loads after pressing playback button
--   Tailwind CSS plugin
-    - Adds new component to Tailwind CSS
-    - Ignores prefix settings in tailwind.config.js
-    - Default variant activated: responsive
--   Stores playback state
--   Customizable animations - CSS animations
--   Title, description and background images
--   Small file sizes JS = 3,3 kByte
--   CSS + Animation = 1,4 kByte
--   Based on Alpine JS and Tailwind CSS
+-   No privacy issues - User has to click before video plays
+-   Remembers visitor - Stores if visitor clicked to accept
+-   Transitions - You can use a great animated preview image
+-   Autoplay mode - Optional and if user already accepted
+-   Based on Alpine JS - Small footprint and Vue JS inspired, like Tailwind for JavaScript
+-   100% Tailwind CSS - Rapidly build modern websites without leaving your HTML
 
 ## Install
 
 **From npm:** Install the package.
-```js
-npm install @markusantonwolf/ta-youtube
+
+```bash
+
+# Install using npm
+
+npm install --save-dev @markusantonwolf/ta-gallery
+
+# Install using yarn
+
+yarn add -D @markusantonwolf/ta-gallery
 ```
 
 **Inside tailwind.config.js:** Add the plugin to your tailwind css config file.
-```js
-// tailwind.config.js
-module.exports = {
-    // ...
-    plugins: [
-        require('@markusantonwolf/ta-youtube')
-    ]
-}
-```
-
-In the following example you can see all available options (default values) for the TA-Youtube plugin for Tailwind CSS. **To add your own configuration add ```taYoutube```to ```theme```and ```variants```.** Your new settings will be merged with the default settings. To change the plugin behaviour in terms of how it adds the new classes as utilities you can add these options as objects to the default function.
 
 ```js
 // tailwind.config.js
+
+const ta_youtube_safelist = require('./node_modules/@markusantonwolf/ta-youtube/src/plugin/safelist')
+
 module.exports = {
+    purge: {
+        // ...
+        options: {
+            safelist: [...ta_youtube_safelist],
+        },
+        // ...
+    },
     // ...
     theme: {
         // ...
@@ -64,134 +68,22 @@ module.exports = {
     },
     variants: {
         // ...
-        taYoutube: ["responsive"], // empty the array if you don't need a responsive variant
+        taYoutube: ['responsive'], // empty the array if you don't need a responsive variant
         // ...
     },
     // ...
     plugins: [
         require('@markusantonwolf/ta-youtube')({
-            respectPrefix: true, // respect prefix option in config: true (default) | false 
-            respectImportant: true, // respect important option in config: true (default) | false 
+            respectPrefix: true, // respect prefix option in config: true (default) | false
+            respectImportant: true, // respect important option in config: true (default) | false
         }),
-    ]
+    ],
 }
 ```
 
-## CDN
+## More TA-Styled-Plugins
 
-### TA-YouTube
-
-```html
-<script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@latest/dist/js/ta-youtube.min.js"></script>
-```
-
-### Alpine JS + TA-YouTube
-
-```html
-<script
-    src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-foodtrucks@latest/dist/js/alpine-ta-youtube.min.js"
-    defer
-></script>
-```
-
-### TA-YouTube old version 1.x
-
-```html
-<script src="https://cdn.jsdelivr.net/gh/markusantonwolf/ta-youtube@1.02/dist/js/youtube.js"></script>
-```
-
-
-## Options
-
-All options you can define
-
-```javascript
-// endpoint url - based on Craftplaces Api service
-init('2ux2H_Iddvc', {
-    
-    // source default is youtube - alternative is vimeo
-    source: 'youtube',
-    
-    // store the play state to the local storage
-    remember: 'true',
-    
-    // starts playing right after clicking
-    autoplay: 'false',
-    
-    // aspect ratio of the video
-    aspect_ratio: '1.78',
-    
-    // start position in seconds
-    start_at: '',
-    
-    // end position in seconds
-    end_at: '',
-    
-    // change the default class name for the button
-    button: 'button',
-
-})
-```
-
-You can define all options as an object inside the init() function - like this example.
-
-```html
-<div
-    class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
-    x-data="taYoutube()"
-    x-init="init('2ux2H_Iddvc', {remember:'false',autoplay: 'true',start_at: 10,end_at:220})"
->
-    <a
-        href="play"
-        class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
-        x-on:click.prevent="show()"
-        x-show="!active"
-    >
-        <!-- CONTENT -->
-    </a>
-    <template x-if="active">
-        <iframe
-            class="absolute inset-0 w-full h-full"
-            :src="url"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-        ></iframe>
-    </template>
-</div>
-```
-
-Alternativly you can define all options as data attributes - like this example.
-
-```html
-<div
-    class="ta-youtube ta-youtube-perspective border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
-    x-data="taYoutube()"
-    x-init="init()"
-    data-id="51018360"
-    data-source="vimeo"
-    data-remember="false"
-    data-autoplay="true"
->
-    <a
-        href="play"
-        class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
-        x-on:click.prevent="show()"
-        x-show="!active"
-    >
-        <!-- CONTENT -->
-    </a>
-    <template x-if="active">
-        <iframe
-            class="absolute inset-0 w-full h-full"
-            :src="url"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-        ></iframe>
-    </template>
-</div>
-```
+-   [TA-Styled-Plugins](https://ta-styled-plugins.com/) - Explore all Tailwind CSS and Alpine JS styled plugins and learn how to enhance your website fast and easy.
 
 ## Local development
 
@@ -213,21 +105,11 @@ npm run develop
 npm run build
 ```
 
-## All TA StyledPlugins
-
--   [TA-Gallery](https://github.com/markusantonwolf/ta-gallery) - An image gallery with endless animation options.
--   [TA-Pagination](https://github.com/markusantonwolf/ta-pagination) - A content pagination solution.
--   [TA-Youtube](https://github.com/markusantonwolf/ta-youtube) - A YouTube video wrapper with auto playback and aspect ratio for the video player.
--   [TA-Analytics](https://github.com/markusantonwolf/ta-analytics) - A plugin for every website that needs to have an easy and customizable Google Analytics “blocker”.
--   [TA-Foodtrucks](https://github.com/markusantonwolf/ta-foodtrucks) - A plugin to show the next food truck and street food dates in your area.
-
-## Licence
-
-TA YouTube is released under the [MIT license](https://github.com/markusantonwolf/ta-youtube/blob/master/licence.md) & supports modern environments.
-
 ## Copyright
 
-© 2020 Markus A. Wolf
+© 2021 Markus A. Wolf
 <https://www.markusantonwolf.com>
 
-<img src="https://github.com/markusantonwolf/ta-youtube/raw/master/public/img/logo-ta-styled-plugins.png" width="200px" style="padding-top:2rem;" />
+<p>
+<img src="./public/img/logo-ta-styled-plugins.png" width="160px" style="display:block;padding-top:4rem;" />
+</p>
