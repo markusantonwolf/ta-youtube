@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>TA-Youtube</title>
         <link href="/css/layout.css" rel="stylesheet" />
-        <script src="/js/alpine.min.js" defer></script>
+        <script src="//unpkg.com/alpinejs" defer></script>
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700&family=Fira+Code:wght@300&display=swap" rel="stylesheet" />
     </head>
     <body class="bg-white font-sans tracking-wide leading-loose text-base text-gray-900 font-light hyphens antialiased">
@@ -27,8 +27,8 @@
                         <p class="my-4">
                             <a
                                 class="inline-block text-pink-800 font-semibold hover:text-black hover:underline mx-2"
-                                href="alpine-v3.html"
-                                >ALPINE V3</a
+                                href="index.html"
+                                >ALPINE V2</a
                             >
                             <a
                                 class="inline-block text-pink-800 font-semibold hover:text-black hover:underline mx-2"
@@ -54,7 +54,11 @@
                         <div
                             class="ta-youtube ta-youtube-aspect-hd border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
                             x-data="taYoutube()"
-                            x-init="init('2ux2H_Iddvc', {remember:'false',autoplay: 'true',start_at: 10,end_at:220})"
+                            data-id="2ux2H_Iddvc"
+                            data-remember="false"
+                            data-autoplay="true"
+                            data-start_at="10"
+                            data-end_at="220"
                         >
                             <a
                                 href="play"
@@ -90,65 +94,6 @@
                                         1856 for parts of the collection of the Royal Dublin Society. The Museum's
                                         collection and the building have changed little since Victorian times, so it is
                                         sometimes considered as a museum of a museum.
-                                    </p>
-                                </div>
-                            </a>
-                            <template x-if="active">
-                                <iframe
-                                    class="absolute inset-0 w-full h-full"
-                                    :src="url"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                ></iframe>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="my-24">
-                        <div
-                            class="ta-youtube ta-youtube-aspect-wide border bg-gray-800 rounded-lg shadow-xl overflow-hidden"
-                            x-data="taYoutube()"
-                            x-init="init()"
-                            data-id="51018360"
-                            data-source="vimeo"
-                            data-remember="false"
-                            data-autoplay="true"
-                        >
-                            <a
-                                href="play"
-                                class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
-                                x-on:click.prevent="show()"
-                                x-show="!active"
-                            >
-                                <img
-                                    class="ta-youtube-background ta-youtube-anim ta-youtube-anim-flight z-0"
-                                    src="https://picsum.photos/id/10/1400/700"
-                                    alt="Background Image"
-                                    title="Background Image"
-                                />
-                                <div class="ta-youtube-gradient ta-youtube-gradient-dark"></div>
-                                <img
-                                    src="/img/youtube-button.svg"
-                                    class="ta-youtube-button transform duration-200 hover:scale-110"
-                                    x-ref="button"
-                                    alt="Show youtube video"
-                                />
-                                <div class="ta-youtube-title">
-                                    <p
-                                        class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-center text-white leading-tight font-normal text-shadow-blur mx-5 sm:mx-16"
-                                    >
-                                        The Natural History Museum Dublin
-                                    </p>
-                                </div>
-                                <div class="ta-youtube-description">
-                                    <p
-                                        class="text-sm sm:text-large lg:text-xl font-medium text-center text-white leading-relaxed text-shadow-blur mx-5 sm:mx-16"
-                                    >
-                                        The Natural History Museum Dublin is a ‘cabinet-style’ museum designed to
-                                        showcase a wide-ranging and comprehensive zoological collection, and has changed
-                                        little in over a century. Often described as a ‘museum of a museum’, its 10,000
-                                        exhibits provide a glimpse of the natural world that has delighted generations
-                                        of visitors since the doors opened in 1857.
                                     </p>
                                 </div>
                             </a>

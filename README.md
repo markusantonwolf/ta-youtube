@@ -4,7 +4,7 @@
 
 # **TA-YouTube** - mobile first video wrapper with aspect ratio
 
-**A light-weight, responsive and mobile first YouTube / Vimeo video wrapper with auto playback and aspect ratio for the video player.**
+**A light-weight, responsive and mobile first YouTube / Vimeo video wrapper with auto playback and aspect ratio for the video player. Runs with Alpine.js V2 and Alpine.js V3**
 
 ## Demos, Documentation and Examples
 
@@ -18,6 +18,8 @@
 
 [Tailwind CSS plugin](https://ta-styled-plugins.com/ta-youtube/tailwind-css-plugin/)
 
+[alpine.js Docs (V3)](https://alpinejs.dev/alpine-101)
+
 ## Features
 
 -   No privacy issues - User has to click before video plays
@@ -25,6 +27,7 @@
 -   Transitions - You can use a great animated preview image
 -   Autoplay mode - Optional and if user already accepted
 -   Based on Alpine JS - Small footprint and Vue JS inspired, like Tailwind for JavaScript
+-   Runs with Alpine.js V2 and Alpine.js V3
 -   100% Tailwind CSS - Rapidly build modern websites without leaving your HTML
 
 ## Install
