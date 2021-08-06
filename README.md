@@ -38,11 +38,11 @@
 
 # Install using npm
 
-npm install --save-dev @markusantonwolf/ta-gallery
+npm install --save-dev @markusantonwolf/ta-youtube
 
 # Install using yarn
 
-yarn add -D @markusantonwolf/ta-gallery
+yarn add -D @markusantonwolf/ta-youtube
 ```
 
 **Inside tailwind.config.js:** Add the plugin to your tailwind css config file.
@@ -50,16 +50,8 @@ yarn add -D @markusantonwolf/ta-gallery
 ```js
 // tailwind.config.js
 
-const ta_youtube_safelist = require('./node_modules/@markusantonwolf/ta-youtube/src/plugin/safelist')
-
 module.exports = {
-    purge: {
-        // ...
-        options: {
-            safelist: [...ta_youtube_safelist],
-        },
-        // ...
-    },
+    purge: {},
     // ...
     theme: {
         // ...
